@@ -25,6 +25,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        mavenLocal() // TODO: Do not merge
         google()
         mavenCentral()
         flatDir {
@@ -63,3 +64,6 @@ fun includeProjects(directory: File, path: String, maxDepth: Int = 1) {
 includeProjects(File(rootDir, "features"), ":features")
 includeProjects(File(rootDir, "libraries"), ":libraries")
 includeProjects(File(rootDir, "services"), ":services")
+
+includeProjects(File(rootDir, "modulesdk"), ":modulesdk")
+includeProjects(File(rootDir, "config"), ":config")

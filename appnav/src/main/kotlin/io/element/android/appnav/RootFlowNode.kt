@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.lifecycleScope
 import com.bumble.appyx.core.composable.Children
+import com.bumble.appyx.core.lifecycle.subscribe
 import com.bumble.appyx.core.modality.BuildContext
 import com.bumble.appyx.core.node.Node
 import com.bumble.appyx.core.node.node
@@ -51,6 +52,7 @@ import io.element.android.libraries.matrix.api.auth.MatrixAuthenticationService
 import io.element.android.libraries.matrix.api.core.SessionId
 import io.element.android.libraries.matrix.api.core.UserId
 import io.element.android.tests.uitests.openShowkase
+import io.element.modulesdk.host.api.ModuleHost
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -61,6 +63,7 @@ import timber.log.Timber
 class RootFlowNode @AssistedInject constructor(
     @Assisted val buildContext: BuildContext,
     @Assisted plugins: List<Plugin>,
+    private val moduleHost: ModuleHost,
     private val authenticationService: MatrixAuthenticationService,
     private val matrixClientsHolder: MatrixClientsHolder,
     private val presenter: RootPresenter,
@@ -74,6 +77,16 @@ class RootFlowNode @AssistedInject constructor(
         buildContext = buildContext,
         plugins = plugins
     ) {
+
+    init {
+        lifecycle.subscribe(
+            onCreate = {
+                moduleHost.lifecycleModule?.onCreate()
+                Timber.v("OnCreate")
+            },
+            onDestroy = { Timber.v("OnDestroy") }
+        )
+    }
 
     override fun onBuilt() {
         super.onBuilt()

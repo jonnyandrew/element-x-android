@@ -57,5 +57,7 @@ dependencies {
     implementation(projects.features.roomlist.impl)
     implementation(projects.features.login.impl)
     implementation(libs.coroutines.core)
+    implementation(projects.modulesdk.host.api)
+    implementation(projects.modulesdk.host.impl)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
 }

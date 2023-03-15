@@ -142,6 +142,9 @@ anvil_compiler_utils = { module = "com.squareup.anvil:compiler-utils", version.r
 # Composer
 wysiwyg = "io.element.android:wysiwyg:1.2.2"
 
+# Feature modules
+module-sample = "io.element.android:feature:0.1.0"
+
 [bundles]
 
 [plugins]
