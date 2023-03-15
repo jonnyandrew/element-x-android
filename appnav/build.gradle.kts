@@ -40,6 +40,8 @@ dependencies {
 
     allFeaturesApi()
 
+    implementation(projects.modulesdk.host.api)
+
     implementation(projects.libraries.core)
     implementation(projects.libraries.architecture)
     implementation(projects.libraries.matrix.api)

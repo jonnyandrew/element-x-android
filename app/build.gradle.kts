@@ -20,6 +20,8 @@ import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
 import extension.allFeaturesImpl
 import extension.allLibrariesImpl
 import extension.allServicesImpl
+import extension.editionFlavors
+import extension.substituteConfig
 
 // TODO: Remove once https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -91,15 +93,17 @@ android {
         }
     }
 
+    val appName = properties[ProjectProperties.APP_NAME] as String? ?: "ElementX"
+
     buildTypes {
         named("debug") {
-            resValue("string", "app_name", "ElementX dbg")
+            resValue("string", "app_name", "$appName dbg")
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("debug")
         }
 
         named("release") {
-            resValue("string", "app_name", "ElementX")
+            resValue("string", "app_name", appName)
             signingConfig = signingConfigs.getByName("debug")
 
             postprocessing {
@@ -138,6 +142,8 @@ android {
                 appId = "1:912726360885:android:e17435e0beb0303000427c"
             }
         }
+        editionFlavors()
+
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -204,6 +210,12 @@ dependencies {
     allLibrariesImpl()
     allServicesImpl()
     allFeaturesImpl()
+    implementation(projects.modulesdk.host.api)
+    implementation(projects.modulesdk.host.impl)
+    implementation(projects.config)
+    implementation(projects.config.default)
+    "enterpriseImplementation"(libs.module.sample)
+
     implementation(projects.tests.uitests)
     implementation(projects.anvilannotations)
     implementation(projects.appnav)
@@ -232,3 +244,5 @@ dependencies {
     testImplementation(libs.test.turbine)
     testImplementation(projects.libraries.matrix.test)
 }
+
+project.substituteConfig()

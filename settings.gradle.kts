@@ -25,6 +25,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        mavenLocal() // TODO: Do not merge
         google()
         mavenCentral()
         flatDir {
@@ -38,6 +39,8 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "ElementX"
 include(":app")
 include(":appnav")
+include(":config")
+include(":config:default")
 include(":libraries:core")
 include(":libraries:rustsdk")
 include(":libraries:matrix:api")
@@ -88,3 +91,7 @@ include(":features:createroom:api")
 include(":features:createroom:impl")
 include(":features:verifysession:api")
 include(":features:verifysession:impl")
+
+include(":modulesdk:sdk")
+include(":modulesdk:host:api")
+include(":modulesdk:host:impl")

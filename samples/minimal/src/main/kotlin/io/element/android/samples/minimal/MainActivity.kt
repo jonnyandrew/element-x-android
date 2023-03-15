@@ -33,6 +33,8 @@ import io.element.android.libraries.designsystem.theme.ElementTheme
 import io.element.android.libraries.matrix.api.auth.MatrixAuthenticationService
 import io.element.android.libraries.matrix.impl.auth.RustMatrixAuthenticationService
 import io.element.android.libraries.sessionstorage.impl.memory.InMemorySessionStore
+import io.element.modulesdk.host.api.EmptyModuleHost
+import io.element.modulesdk.host.api.ModuleHost
 import kotlinx.coroutines.runBlocking
 import java.io.File
 
@@ -48,6 +50,8 @@ class MainActivity : ComponentActivity() {
             sessionStore = InMemorySessionStore(),
         )
     }
+
+    private val moduleHost: ModuleHost = EmptyModuleHost()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +71,7 @@ class MainActivity : ComponentActivity() {
         modifier: Modifier = Modifier
     ) {
         if (!isLoggedIn) {
-            LoginScreen(authenticationService = matrixAuthenticationService).Content(modifier)
+            LoginScreen(authenticationService = matrixAuthenticationService, moduleHost = moduleHost).Content(modifier)
         } else {
             val matrixClient = runBlocking {
                 val sessionId = matrixAuthenticationService.getLatestSessionId()!!

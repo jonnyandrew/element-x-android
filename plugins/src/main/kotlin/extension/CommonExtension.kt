@@ -73,4 +73,18 @@ fun CommonExtension<*, *, *, *>.composeConfig(libs: LibrariesForLibs) {
         ignoreTestFixturesSources = true
     }
 }
+fun CommonExtension<*, *, *, *>.editionFlavors() {
+    flavorDimensions += "edition"
+    productFlavors {
+        create("community") {
+            dimension = "edition"
+        }
+        create("enterprise") {
+            dimension = "edition"
+        }
+    }
+
+    // TODO: Filter variants
+    //  http://developer.android.com/studio/build/build-variants#filter-variants.is
+}
 
