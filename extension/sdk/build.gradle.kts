@@ -1,6 +1,3 @@
-import extension.editionFlavors
-import extension.substituteConfig
-
 /*
  * Copyright (c) 2023 New Vector Ltd
  *
@@ -17,40 +14,38 @@ import extension.substituteConfig
  * limitations under the License.
  */
 
-// TODO: Remove once https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("io.element.android-library")
     `maven-publish`
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.anvil)
-}
-
-anvil {
-    generateDaggerFactories.set(true)
 }
 
 android {
-    namespace = "io.element.android.config"
+    namespace = "io.element.android.x.extension.sdk"
 
-    editionFlavors()
+    publishing {
+        // TODO: Publish the release variant
+        singleVariant("debug") {
+            withSourcesJar()
+        }
+    }
+
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
-    implementation(libs.dagger)
-    implementation(projects.libraries.di)
-    implementation(projects.anvilannotations)
-
-    implementation(projects.extension.sdk)
-    implementation(projects.config.default)
-
-    // Features
-    "enterpriseImplementation"(libs.module.sample)
-
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
-    this
 }
 
-project.substituteConfig()
 
+publishing {
+    publications {
+        register<MavenPublication>("debug") {
+            groupId = "io.element.android.x"
+            artifactId = "extension-sdk"
+            version = "0.1.0"
+
+            afterEvaluate {
+                from(components["debug"])
+            }
+        }
+    }
+}

@@ -20,7 +20,7 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import io.element.android.libraries.di.AppScope
-import io.element.modulesdk.lifecycle.LifecycleModule
+import io.element.extension.lifecycle.LifecycleExtension
 import java.util.*
 
 @Module
@@ -28,6 +28,6 @@ import java.util.*
 interface FeaturesModule {
     companion object {
         @Provides
-        fun provideLifecycleModules(): Array<LifecycleModule> = emptyArray()
+        fun provideLifecycleModules(): Array<LifecycleExtension> = emptyArray()
     }
 }

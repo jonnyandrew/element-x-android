@@ -16,15 +16,14 @@
 
 package io.element.android.x.config
 
-import io.element.modulesdk.ElementConfigProvider
-import io.element.modulesdk.connection.ConnectionModule
+import io.element.extension.ElementConfigProvider
+import io.element.extension.connection.ConnectionConfig
 
 class ElementConfig: ElementConfigProvider {
     override val configName: String
         get() = "Default enterprise configuration"
 
-    override fun connectionModule(): ConnectionModule? = null
+    override fun connectionConfig(): ConnectionConfig? = null
 
-    override val isSampleFeatureEnabled: Boolean
-        get() = true
+    override val isSampleExtensionEnabled: Boolean = true
 }
