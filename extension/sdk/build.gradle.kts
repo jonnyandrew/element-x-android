@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id("io.element.android-library")
+    id("io.element.android-compose-library")
     `maven-publish`
 }
 
@@ -41,7 +41,7 @@ publishing {
         register<MavenPublication>("debug") {
             groupId = "io.element.android.x"
             artifactId = "extension-sdk"
-            version = "0.1.0"
+            version = "0.2.0"
 
             afterEvaluate {
                 from(components["debug"])

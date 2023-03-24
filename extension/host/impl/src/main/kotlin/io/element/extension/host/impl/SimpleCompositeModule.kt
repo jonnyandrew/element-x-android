@@ -35,7 +35,7 @@ internal class SimpleCompositeModule<T : ElementExtension>(private val objects: 
     }
 }
 
-internal inline fun <reified T : ElementExtension> Iterable<T>.toSimpleCompositeModule(): T {
+internal inline fun <reified T : ElementExtension> Iterable<T>.toSimpleCompositeExtension(): T {
     val classLoader = T::class.java.classLoader
     val delegates = this
     val compositeModule = SimpleCompositeModule(delegates)
@@ -43,6 +43,6 @@ internal inline fun <reified T : ElementExtension> Iterable<T>.toSimpleComposite
     return Proxy.newProxyInstance(classLoader, arrayOf(T::class.java), compositeModule) as T
 }
 
-internal inline fun <reified T : ElementExtension> Array<T>.toSimpleCompositeModule(): T
-    = this.asIterable().toSimpleCompositeModule()
+internal inline fun <reified T : ElementExtension> Array<T>.toSimpleCompositeExtension(): T
+    = this.asIterable().toSimpleCompositeExtension()
 

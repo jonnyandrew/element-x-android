@@ -81,7 +81,7 @@ class RootFlowNode @AssistedInject constructor(
     init {
         lifecycle.subscribe(
             onCreate = {
-                moduleHost.lifecycleModule?.onCreate()
+                moduleHost.lifecycleExtensions?.onCreate()
                 Timber.v("OnCreate")
             },
             onDestroy = { Timber.v("OnDestroy") }

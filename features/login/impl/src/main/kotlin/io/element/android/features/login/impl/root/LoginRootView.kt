@@ -81,6 +81,7 @@ import io.element.android.libraries.designsystem.theme.components.onTabOrEnterKe
 import io.element.android.libraries.matrix.api.core.SessionId
 import io.element.android.libraries.testtags.TestTags
 import io.element.android.libraries.testtags.testTag
+import io.element.extension.host.api.ModuleHost
 import io.element.android.libraries.ui.strings.R as StringR
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -91,6 +92,7 @@ fun LoginRootView(
     onChangeServer: () -> Unit = {},
     onLoginWithSuccess: (SessionId) -> Unit = {},
     onBackPressed: () -> Unit,
+    moduleHost: ModuleHost? = null,
 ) {
     val interactionEnabled by remember(state.loggedInState) {
         derivedStateOf {
@@ -119,7 +121,10 @@ fun LoginRootView(
                     .padding(horizontal = 16.dp),
             ) {
                 Spacer(Modifier.height(16.dp))
-                // Title
+                moduleHost?.loginExtensions?.let {
+                    it.Branding()
+                    Spacer(Modifier.height(16.dp))
+                }
                 Text(
                     text = stringResource(id = StringR.string.ftue_auth_welcome_back_title),
                     modifier = Modifier

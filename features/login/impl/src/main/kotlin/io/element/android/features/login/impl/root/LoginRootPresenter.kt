@@ -38,7 +38,7 @@ class LoginRootPresenter @Inject constructor(
 ) : Presenter<LoginRootState> {
 
     private val defaultHomeserver = MatrixHomeServerDetails(
-        moduleHost.connectionModule?.customHomeServerUrl() ?: LoginConstants.DEFAULT_HOMESERVER_URL,
+        moduleHost.connectionConfig?.customHomeServerUrl() ?: LoginConstants.DEFAULT_HOMESERVER_URL,
         true,
         null
     )
