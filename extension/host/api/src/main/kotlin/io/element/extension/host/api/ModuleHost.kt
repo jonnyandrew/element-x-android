@@ -18,11 +18,13 @@ package io.element.extension.host.api
 
 import io.element.extension.connection.ConnectionConfig
 import io.element.extension.lifecycle.LifecycleExtension
+import io.element.extension.login.LoginExtension
 
 /**
  * Interface between the host app and the modules
  */
 interface ModuleHost {
-    val connectionModule: ConnectionConfig?
-    val lifecycleModule: LifecycleExtension?
+    val connectionConfig: ConnectionConfig?
+    val lifecycleExtensions: LifecycleExtension?
+    val loginExtensions: LoginExtension?
 }

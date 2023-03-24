@@ -19,12 +19,17 @@ package io.element.extension.host.impl
 import io.element.extension.connection.ConnectionConfig
 import io.element.extension.host.api.ModuleHost
 import io.element.extension.lifecycle.LifecycleExtension
+import io.element.extension.login.LoginExtension
 import javax.inject.Inject
 
 class DefaultModuleHost @Inject constructor(
-    override val connectionModule: ConnectionConfig?,
-    lifecycleModules: Array<LifecycleExtension>,
+    override val connectionConfig: ConnectionConfig?,
+    lifecycleExtensions: Array<LifecycleExtension>,
+    loginExtensions: Array<LoginExtension>,
 ) : ModuleHost {
-    override val lifecycleModule: LifecycleExtension =
-        lifecycleModules.toSimpleCompositeModule()
+    override val lifecycleExtensions: LifecycleExtension =
+        lifecycleExtensions.toSimpleCompositeExtension()
+
+    override val loginExtensions: LoginExtension =
+        loginExtensions.toSimpleCompositeExtension()
 }

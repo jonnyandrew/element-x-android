@@ -26,11 +26,13 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import io.element.android.anvilannotations.ContributesNode
 import io.element.android.libraries.di.AppScope
+import io.element.extension.host.api.ModuleHost
 
 @ContributesNode(AppScope::class)
 class LoginRootNode @AssistedInject constructor(
     @Assisted buildContext: BuildContext,
     @Assisted plugins: List<Plugin>,
+    private val moduleHost: ModuleHost,
     private val presenter: LoginRootPresenter,
 ) : Node(buildContext, plugins = plugins) {
 
@@ -49,7 +51,8 @@ class LoginRootNode @AssistedInject constructor(
             state = state,
             modifier = modifier,
             onChangeServer = this::onChangeHomeServer,
-            onBackPressed = this::navigateUp
+            onBackPressed = this::navigateUp,
+            moduleHost = moduleHost,
         )
     }
 }

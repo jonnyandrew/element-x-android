@@ -17,10 +17,12 @@
 package io.element.extension
 
 import io.element.extension.lifecycle.LifecycleExtension
+import io.element.extension.login.LoginExtension
 
 /**
  * Implement this interface to provide an extension
  */
 interface ElementExtensionProvider {
     fun lifecycle(): LifecycleExtension? = null
+    fun login(): LoginExtension? = null
 }

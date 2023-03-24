@@ -14,20 +14,12 @@
  * limitations under the License.
  */
 
-package io.element.extension.host.api
+package io.element.extension.login
 
-import io.element.extension.connection.ConnectionConfig
-import io.element.extension.lifecycle.LifecycleExtension
-import io.element.extension.login.LoginExtension
+import androidx.compose.runtime.Composable
+import io.element.extension.ElementExtension
 
-/**
- * Convenience for a module host that does nothing
- */
-class EmptyModuleHost : ModuleHost {
-    override val lifecycleExtensions: LifecycleExtension?
-        get() = null
-    override val connectionConfig: ConnectionConfig?
-        get() = null
-    override val loginExtensions: LoginExtension?
-        get() = null
+interface LoginExtension : ElementExtension {
+    @Composable
+    fun Branding()
 }
