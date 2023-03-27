@@ -19,6 +19,7 @@
 plugins {
     id("io.element.android-compose-library")
     alias(libs.plugins.ksp)
+    `maven-publish`
 }
 
 android {
@@ -28,8 +29,25 @@ android {
         // Should not be there, but this is a POC
         implementation(libs.coil.compose)
         implementation(libs.accompanist.systemui)
-        implementation(projects.libraries.elementresources)
-        implementation(projects.libraries.uiStrings)
+
+        debugImplementation(projects.libraries.uiStrings)
+        releaseImplementation(libs.elementx.uistrings)
+        api("androidx.compose.material3:material3")
+
         ksp(libs.showkase.processor)
+    }
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("debug") {
+            groupId = "io.element.android.x"
+            artifactId = "design-system"
+            version = libs.versions.elementx.extension.sdk.get()
+
+            afterEvaluate {
+                from(components["debug"])
+            }
+        }
     }
 }

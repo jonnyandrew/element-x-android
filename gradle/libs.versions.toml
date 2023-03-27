@@ -9,6 +9,9 @@ kotlin = "1.8.10"
 ksp = "1.8.10-1.0.9"
 molecule = "0.8.0"
 
+# ElementX
+elementx_extension_sdk = "0.2.0"
+
 # AndroidX
 material = "1.8.0"
 corektx = "1.9.0"
@@ -57,6 +60,11 @@ dependencygraph = "0.10"
 android_gradle_plugin = { module = "com.android.tools.build:gradle", version.ref = "android_gradle_plugin" }
 firebase_gradle_plugin = { module = "com.google.firebase:firebase-appdistribution-gradle", version.ref = "firebase_gradle_plugin" }
 kotlin_gradle_plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+# ElementX
+elementx_extensionsdk = { module = "io.element.android.x:extension-sdk", version.ref = "elementx_extension_sdk" }
+elementx_designsystem = { module = "io.element.android.x:design-system", version.ref = "elementx_extension_sdk" }
+elementx_uistrings = { module = "io.element.android.x:ui-strings", version.ref = "elementx_extension_sdk" }
 
 # AndroidX
 androidx_material = { module = "com.google.android.material:material", version.ref = "material" }
