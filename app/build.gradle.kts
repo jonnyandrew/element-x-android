@@ -214,7 +214,7 @@ dependencies {
     implementation(projects.extension.host.impl)
     implementation(projects.config)
     implementation(projects.config.default)
-    "enterpriseImplementation"(libs.module.sample)
+    "enterpriseImplementation"(libs.extension.sample)
 
     implementation(projects.tests.uitests)
     implementation(projects.anvilannotations)

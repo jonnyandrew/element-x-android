@@ -41,7 +41,7 @@ publishing {
         register<MavenPublication>("debug") {
             groupId = "io.element.android.x"
             artifactId = "extension-sdk"
-            version = "0.2.0"
+            version = libs.versions.elementx.extension.sdk.get()
 
             afterEvaluate {
                 from(components["debug"])

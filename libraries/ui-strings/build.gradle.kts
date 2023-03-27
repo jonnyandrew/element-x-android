@@ -18,11 +18,26 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("io.element.android-library")
+    `maven-publish`
     alias(libs.plugins.stemlibrary)
 }
 
 android {
     namespace = "io.element.android.libraries.ui.strings"
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("debug") {
+            groupId = "io.element.android.x"
+            artifactId = "ui-strings"
+            version = libs.versions.elementx.extension.sdk.get()
+
+            afterEvaluate {
+                from(components["debug"])
+            }
+        }
+    }
 }
 
 // forcing the stem string template generator to be cacheable, without this the templates

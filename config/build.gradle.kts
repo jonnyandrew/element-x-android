@@ -46,7 +46,7 @@ dependencies {
     implementation(projects.config.default)
 
     // Features
-    "enterpriseImplementation"(libs.module.sample)
+    "enterpriseImplementation"(libs.extension.sample)
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
     this
