@@ -16,6 +16,7 @@
 
 package io.element.android.features.login.impl.root
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -52,6 +53,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -94,6 +96,7 @@ fun LoginRootView(
     onBackPressed: () -> Unit,
     moduleHost: ModuleHost? = null,
 ) {
+    val context = LocalContext.current
     val isLoading by remember(state.loggedInState) {
         derivedStateOf {
             state.loggedInState == LoggedInState.LoggingIn
@@ -122,7 +125,9 @@ fun LoginRootView(
             ) {
                 Spacer(Modifier.height(16.dp))
                 moduleHost?.loginExtensions?.let {
-                    it.Branding()
+                    it.Banner(onInteractionComplete = {
+                        Toast.makeText(context, "You interacted with an extension!", Toast.LENGTH_SHORT).show()
+                    })
                     Spacer(Modifier.height(16.dp))
                 }
                 Text(

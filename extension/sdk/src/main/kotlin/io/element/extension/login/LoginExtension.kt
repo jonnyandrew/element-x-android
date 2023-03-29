@@ -21,5 +21,7 @@ import io.element.extension.ElementExtension
 
 interface LoginExtension : ElementExtension {
     @Composable
-    fun Branding()
+    fun Banner(
+        onInteractionComplete: () -> Unit
+    )
 }
