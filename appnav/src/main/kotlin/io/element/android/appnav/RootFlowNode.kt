@@ -52,7 +52,7 @@ import io.element.android.libraries.matrix.api.auth.MatrixAuthenticationService
 import io.element.android.libraries.matrix.api.core.SessionId
 import io.element.android.libraries.matrix.api.core.UserId
 import io.element.android.tests.uitests.openShowkase
-import io.element.extension.host.api.ModuleHost
+import io.element.extension.host.api.ExtensionHost
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -63,7 +63,7 @@ import timber.log.Timber
 class RootFlowNode @AssistedInject constructor(
     @Assisted val buildContext: BuildContext,
     @Assisted plugins: List<Plugin>,
-    private val moduleHost: ModuleHost,
+    private val extensionHost: ExtensionHost,
     private val authenticationService: MatrixAuthenticationService,
     private val matrixClientsHolder: MatrixClientsHolder,
     private val presenter: RootPresenter,
@@ -81,7 +81,7 @@ class RootFlowNode @AssistedInject constructor(
     init {
         lifecycle.subscribe(
             onCreate = {
-                moduleHost.lifecycleExtensions?.onCreate()
+                extensionHost.lifecycleExtensions?.onCreate()
                 Timber.v("OnCreate")
             },
             onDestroy = { Timber.v("OnDestroy") }

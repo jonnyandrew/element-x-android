@@ -24,7 +24,7 @@ import io.element.extension.login.LoginExtension
 /**
  * Interface between the host app and the modules
  */
-interface ModuleHost {
+interface ExtensionHost {
     val connectionConfig: ConnectionConfig?
     val lifecycleExtensions: LifecycleExtension?
     val loginExtensions: LoginExtension?

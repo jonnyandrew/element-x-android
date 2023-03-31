@@ -20,12 +20,12 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Binds
 import dagger.Module
 import io.element.android.libraries.di.AppScope
-import io.element.extension.host.api.ModuleHost
+import io.element.extension.host.api.ExtensionHost
 import java.util.*
 
 @Module
 @ContributesTo(AppScope::class)
-interface ModuleHostModule {
+interface ExtensionHostModule {
     @Binds
-    fun bindsModuleHost(impl: DefaultModuleHost): ModuleHost
+    fun bindsExtensionHost(impl: DefaultExtensionHost): ExtensionHost
 }

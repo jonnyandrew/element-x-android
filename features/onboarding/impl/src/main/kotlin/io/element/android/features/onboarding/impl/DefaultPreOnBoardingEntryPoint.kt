@@ -21,15 +21,15 @@ import com.bumble.appyx.core.node.Node
 import com.squareup.anvil.annotations.ContributesBinding
 import io.element.android.features.onboarding.api.PreOnBoardingEntryPoint
 import io.element.android.libraries.di.AppScope
-import io.element.extension.host.api.ModuleHost
+import io.element.extension.host.api.ExtensionHost
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
 class DefaultPreOnBoardingEntryPoint @Inject constructor(
-    private val moduleHost: ModuleHost
+    private val extensionHost: ExtensionHost
 ) : PreOnBoardingEntryPoint {
     override val totalNodes: Int
-        get() = moduleHost.onboardingExtensionHost.totalNodes
+        get() = extensionHost.onboardingExtensionHost.totalNodes
 
     override fun createNode(
         parentNode: Node,
@@ -39,7 +39,7 @@ class DefaultPreOnBoardingEntryPoint @Inject constructor(
     ): Node {
         val onDone: () -> Unit = { callback.onDone(index) }
 
-        return moduleHost.onboardingExtensionHost
+        return extensionHost.onboardingExtensionHost
             .createOnboardingNode(buildContext, index, onDone)
     }
 }
