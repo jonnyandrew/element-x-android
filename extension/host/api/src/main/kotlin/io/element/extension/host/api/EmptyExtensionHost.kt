@@ -25,7 +25,7 @@ import io.element.extension.login.LoginExtension
 /**
  * Convenience for a module host that does nothing
  */
-class EmptyModuleHost : ModuleHost {
+class EmptyExtensionHost : ExtensionHost {
     override val lifecycleExtensions: LifecycleExtension?
         get() = null
     override val connectionConfig: ConnectionConfig?

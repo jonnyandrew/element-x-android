@@ -83,7 +83,7 @@ import io.element.android.libraries.designsystem.theme.components.onTabOrEnterKe
 import io.element.android.libraries.matrix.api.core.SessionId
 import io.element.android.libraries.testtags.TestTags
 import io.element.android.libraries.testtags.testTag
-import io.element.extension.host.api.ModuleHost
+import io.element.extension.host.api.ExtensionHost
 import io.element.android.libraries.ui.strings.R as StringR
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,7 +94,7 @@ fun LoginRootView(
     onChangeServer: () -> Unit = {},
     onLoginWithSuccess: (SessionId) -> Unit = {},
     onBackPressed: () -> Unit,
-    moduleHost: ModuleHost? = null,
+    extensionHost: ExtensionHost? = null,
 ) {
     val context = LocalContext.current
     val isLoading by remember(state.loggedInState) {
@@ -124,7 +124,7 @@ fun LoginRootView(
                     .padding(horizontal = 16.dp),
             ) {
                 Spacer(Modifier.height(16.dp))
-                moduleHost?.loginExtensions?.let {
+                extensionHost?.loginExtensions?.let {
                     it.Banner(onInteractionComplete = {
                         Toast.makeText(context, "You interacted with an extension!", Toast.LENGTH_SHORT).show()
                     })

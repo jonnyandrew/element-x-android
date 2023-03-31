@@ -27,18 +27,18 @@ import io.element.android.features.login.impl.util.LoginConstants
 import io.element.android.libraries.architecture.Presenter
 import io.element.android.libraries.matrix.api.auth.MatrixAuthenticationService
 import io.element.android.libraries.matrix.api.auth.MatrixHomeServerDetails
-import io.element.extension.host.api.ModuleHost
+import io.element.extension.host.api.ExtensionHost
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoginRootPresenter @Inject constructor(
     private val authenticationService: MatrixAuthenticationService,
-    moduleHost: ModuleHost
+    extensionHost: ExtensionHost
 ) : Presenter<LoginRootState> {
 
     private val defaultHomeserver = MatrixHomeServerDetails(
-        moduleHost.connectionConfig?.customHomeServerUrl() ?: LoginConstants.DEFAULT_HOMESERVER_URL,
+        extensionHost.connectionConfig?.customHomeServerUrl() ?: LoginConstants.DEFAULT_HOMESERVER_URL,
         true,
         null
     )

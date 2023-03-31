@@ -19,7 +19,7 @@ package io.element.extension.host.impl
 import io.element.extension.ElementExtension
 import io.element.extension.ElementExtensionProvider
 import io.element.extension.connection.ConnectionConfig
-import io.element.extension.host.api.ModuleHost
+import io.element.extension.host.api.ExtensionHost
 import io.element.extension.host.api.onboarding.OnboardingExtensionHost
 import io.element.extension.host.impl.onboarding.DefaultOnboardingExtensionHost
 import io.element.extension.lifecycle
@@ -29,10 +29,10 @@ import io.element.extension.login.LoginExtension
 import io.element.extension.onboarding
 import javax.inject.Inject
 
-class DefaultModuleHost @Inject constructor(
+class DefaultExtensionHost @Inject constructor(
     override val connectionConfig: ConnectionConfig?,
     private val extensions: Array<ElementExtension>,
-) : ModuleHost {
+) : ExtensionHost {
     private val extensionProvider: ElementExtensionProvider = object : ElementExtensionProvider {
         override fun extensions(): List<ElementExtension> =
             extensions.toList()

@@ -22,17 +22,17 @@ import androidx.compose.ui.Modifier
 import io.element.android.features.login.impl.root.LoginRootPresenter
 import io.element.android.features.login.impl.root.LoginRootView
 import io.element.android.libraries.matrix.api.auth.MatrixAuthenticationService
-import io.element.extension.host.api.ModuleHost
+import io.element.extension.host.api.ExtensionHost
 
 class LoginScreen(
     private val authenticationService: MatrixAuthenticationService,
-    private val moduleHost: ModuleHost
+    private val extensionHost: ExtensionHost
 ) {
 
     @Composable
     fun Content(modifier: Modifier = Modifier) {
         val presenter = remember {
-            LoginRootPresenter(authenticationService = authenticationService, moduleHost = moduleHost)
+            LoginRootPresenter(authenticationService = authenticationService, extensionHost = extensionHost)
         }
         val state = presenter.present()
         LoginRootView(
