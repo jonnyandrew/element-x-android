@@ -23,9 +23,8 @@ import io.element.android.feature.SampleElementExtensionProvider
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.di.SingleIn
 import io.element.extension.ElementConfigProvider
+import io.element.extension.ElementExtension
 import io.element.extension.ElementExtensionProvider
-import io.element.extension.lifecycle.LifecycleExtension
-import io.element.extension.login.LoginExtension
 import java.util.*
 
 @Module
@@ -46,25 +45,10 @@ interface FeaturesModule {
         @Provides
         fun provideOrderedExtensions(
             sampleElementFeatureProvider: SampleElementExtensionProvider?
-        ): Array<ElementExtensionProvider> =
-            listOfNotNull(
+        ): Array<ElementExtension> =
+            listOfNotNull<ElementExtensionProvider>(
                 sampleElementFeatureProvider
-            ).toTypedArray()
-
-
-        @Provides
-        fun provideLifecycleExtensions(
-            orderedExtensions: Array<ElementExtensionProvider>
-        ): Array<LifecycleExtension> = orderedExtensions.mapNotNull {
-            it.lifecycle()
-        }.toTypedArray()
-
-        @Provides
-        fun provideLoginExtensions(
-            orderedExtensions: Array<ElementExtensionProvider>
-        ): Array<LoginExtension> =
-            orderedExtensions.mapNotNull {
-            it.login()
-        }.toTypedArray()
+            ).flatMap(ElementExtensionProvider::extensions)
+                .toTypedArray()
     }
 }

@@ -16,20 +16,36 @@
 
 package io.element.extension.host.impl
 
+import io.element.extension.ElementExtension
+import io.element.extension.ElementExtensionProvider
 import io.element.extension.connection.ConnectionConfig
 import io.element.extension.host.api.ModuleHost
+import io.element.extension.host.api.onboarding.OnboardingExtensionHost
+import io.element.extension.host.impl.onboarding.DefaultOnboardingExtensionHost
+import io.element.extension.lifecycle
 import io.element.extension.lifecycle.LifecycleExtension
+import io.element.extension.login
 import io.element.extension.login.LoginExtension
+import io.element.extension.onboarding
 import javax.inject.Inject
 
 class DefaultModuleHost @Inject constructor(
     override val connectionConfig: ConnectionConfig?,
-    lifecycleExtensions: Array<LifecycleExtension>,
-    loginExtensions: Array<LoginExtension>,
+    private val extensions: Array<ElementExtension>,
 ) : ModuleHost {
+    private val extensionProvider: ElementExtensionProvider = object : ElementExtensionProvider {
+        override fun extensions(): List<ElementExtension> =
+            extensions.toList()
+    }
+
     override val lifecycleExtensions: LifecycleExtension =
-        lifecycleExtensions.toSimpleCompositeExtension()
+        extensionProvider.lifecycle().toSimpleCompositeExtension()
 
     override val loginExtensions: LoginExtension =
-        loginExtensions.toSimpleCompositeExtension()
+        extensionProvider.login().toSimpleCompositeExtension()
+
+    override val onboardingExtensionHost: OnboardingExtensionHost =
+        DefaultOnboardingExtensionHost(
+            extensionProvider.onboarding()
+        )
 }

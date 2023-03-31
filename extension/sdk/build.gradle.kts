@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    api(libs.appyx.core)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
 }
 

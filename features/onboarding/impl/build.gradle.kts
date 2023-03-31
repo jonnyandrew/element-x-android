@@ -34,6 +34,7 @@ anvil {
 dependencies {
     implementation(projects.anvilannotations)
     anvil(projects.anvilcodegen)
+    implementation(projects.extension.host.api)
     implementation(projects.libraries.core)
     implementation(projects.libraries.architecture)
     implementation(projects.libraries.matrix.api)

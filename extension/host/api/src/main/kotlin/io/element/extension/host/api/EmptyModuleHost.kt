@@ -17,6 +17,8 @@
 package io.element.extension.host.api
 
 import io.element.extension.connection.ConnectionConfig
+import io.element.extension.host.api.onboarding.EmptyOnboardingExtensionHost
+import io.element.extension.host.api.onboarding.OnboardingExtensionHost
 import io.element.extension.lifecycle.LifecycleExtension
 import io.element.extension.login.LoginExtension
 
@@ -30,4 +32,6 @@ class EmptyModuleHost : ModuleHost {
         get() = null
     override val loginExtensions: LoginExtension?
         get() = null
+    override val onboardingExtensionHost: OnboardingExtensionHost
+        get() = EmptyOnboardingExtensionHost()
 }
