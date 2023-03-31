@@ -18,29 +18,28 @@ package io.element.android.features.onboarding.impl
 
 import com.bumble.appyx.core.modality.BuildContext
 import com.bumble.appyx.core.node.Node
-import com.bumble.appyx.core.plugin.Plugin
 import com.squareup.anvil.annotations.ContributesBinding
-import io.element.android.features.onboarding.api.OnBoardingEntryPoint
-import io.element.android.libraries.architecture.createNode
+import io.element.android.features.onboarding.api.PreOnBoardingEntryPoint
 import io.element.android.libraries.di.AppScope
+import io.element.extension.host.api.ModuleHost
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
-class DefaultOnBoardingEntryPoint @Inject constructor(
-) : OnBoardingEntryPoint {
-    override fun nodeBuilder(parentNode: Node, buildContext: BuildContext): OnBoardingEntryPoint.NodeBuilder {
-        return object : OnBoardingEntryPoint.NodeBuilder {
+class DefaultPreOnBoardingEntryPoint @Inject constructor(
+    private val moduleHost: ModuleHost
+) : PreOnBoardingEntryPoint {
+    override val totalNodes: Int
+        get() = moduleHost.onboardingExtensionHost.totalNodes
 
-            val plugins = ArrayList<Plugin>()
+    override fun createNode(
+        parentNode: Node,
+        buildContext: BuildContext,
+        index: Int,
+        callback: PreOnBoardingEntryPoint.Callback
+    ): Node {
+        val onDone: () -> Unit = { callback.onDone(index) }
 
-            override fun callback(callback: OnBoardingEntryPoint.Callback): OnBoardingEntryPoint.NodeBuilder {
-                plugins += callback
-                return this
-            }
-
-            override fun build(): Node {
-                return parentNode.createNode<OnBoardingNode>(buildContext, plugins)
-            }
-        }
+        return moduleHost.onboardingExtensionHost
+            .createOnboardingNode(buildContext, index, onDone)
     }
 }

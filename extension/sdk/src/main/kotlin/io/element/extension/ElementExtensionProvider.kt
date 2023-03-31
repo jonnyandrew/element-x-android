@@ -18,11 +18,19 @@ package io.element.extension
 
 import io.element.extension.lifecycle.LifecycleExtension
 import io.element.extension.login.LoginExtension
+import io.element.extension.onboarding.OnboardingExtension
 
 /**
  * Implement this interface to provide an extension
  */
 interface ElementExtensionProvider {
-    fun lifecycle(): LifecycleExtension? = null
-    fun login(): LoginExtension? = null
+    fun extensions(): List<ElementExtension>
 }
+
+fun ElementExtensionProvider.login() = get<LoginExtension>()
+fun ElementExtensionProvider.lifecycle() = get<LifecycleExtension>()
+fun ElementExtensionProvider.onboarding() = get<OnboardingExtension>()
+
+private inline fun <reified T : ElementExtension>
+    ElementExtensionProvider.get() = extensions().filterIsInstance<T>()
+

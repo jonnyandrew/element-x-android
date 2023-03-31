@@ -20,7 +20,8 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import io.element.android.libraries.di.AppScope
-import io.element.extension.lifecycle.LifecycleExtension
+import io.element.extension.ElementExtension
+import io.element.extension.ElementExtensionProvider
 import java.util.*
 
 @Module
@@ -28,6 +29,14 @@ import java.util.*
 interface FeaturesModule {
     companion object {
         @Provides
-        fun provideLifecycleModules(): Array<LifecycleExtension> = emptyArray()
+        fun provideOrderedExtensions(): Array<ElementExtension> {
+            // It's still possible to install extensions in the community edition
+            // by adding them here
+            val communityExtensions = listOf<ElementExtensionProvider>()
+
+            return communityExtensions
+                .flatMap(ElementExtensionProvider::extensions)
+                .toTypedArray()
+        }
     }
 }

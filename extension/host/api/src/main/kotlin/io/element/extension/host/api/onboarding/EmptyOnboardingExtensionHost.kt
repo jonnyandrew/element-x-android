@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-package io.element.extension.host.api
+package io.element.extension.host.api.onboarding
 
-import io.element.extension.connection.ConnectionConfig
-import io.element.extension.host.api.onboarding.OnboardingExtensionHost
-import io.element.extension.lifecycle.LifecycleExtension
-import io.element.extension.login.LoginExtension
+import com.bumble.appyx.core.modality.BuildContext
+import com.bumble.appyx.core.node.Node
 
-/**
- * Interface between the host app and the modules
- */
-interface ModuleHost {
-    val connectionConfig: ConnectionConfig?
-    val lifecycleExtensions: LifecycleExtension?
-    val loginExtensions: LoginExtension?
-    val onboardingExtensionHost: OnboardingExtensionHost
+class EmptyOnboardingExtensionHost : OnboardingExtensionHost {
+    override fun createOnboardingNode(
+        buildContext: BuildContext, index: Int, onDone: () -> Unit
+    ): Node = throw IndexOutOfBoundsException()
+
+    override val totalNodes: Int = 0
 }

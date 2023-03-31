@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package io.element.extension.host.api
+package io.element.android.features.onboarding.api
 
-import io.element.extension.connection.ConnectionConfig
-import io.element.extension.host.api.onboarding.OnboardingExtensionHost
-import io.element.extension.lifecycle.LifecycleExtension
-import io.element.extension.login.LoginExtension
+import com.bumble.appyx.core.modality.BuildContext
+import com.bumble.appyx.core.node.Node
+import com.bumble.appyx.core.plugin.Plugin
+import io.element.android.libraries.architecture.FeatureEntryPoint
 
-/**
- * Interface between the host app and the modules
- */
-interface ModuleHost {
-    val connectionConfig: ConnectionConfig?
-    val lifecycleExtensions: LifecycleExtension?
-    val loginExtensions: LoginExtension?
-    val onboardingExtensionHost: OnboardingExtensionHost
+interface PreOnBoardingEntryPoint : FeatureEntryPoint {
+
+    fun createNode(
+        parentNode: Node,
+        buildContext: BuildContext,
+        index: Int,
+        callback: Callback,
+    ): Node
+
+    val totalNodes: Int
+
+    interface Callback : Plugin {
+        fun onDone(index: Int)
+    }
 }
