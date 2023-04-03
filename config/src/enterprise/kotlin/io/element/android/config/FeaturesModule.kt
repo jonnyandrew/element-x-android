@@ -19,11 +19,11 @@ package io.element.android.config
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
-import io.element.android.feature.SampleElementFeatureProvider
+import io.element.android.feature.SampleElementExtensionProvider
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.di.SingleIn
-import io.element.modulesdk.ElementConfigProvider
-import io.element.modulesdk.lifecycle.LifecycleModule
+import io.element.extension.ElementConfigProvider
+import io.element.extension.lifecycle.LifecycleExtension
 import java.util.*
 
 @Module
@@ -34,18 +34,18 @@ interface FeaturesModule {
         @SingleIn(AppScope::class)
         fun provideSampleElementFeatureProvider(
             elementConfigProvider: ElementConfigProvider
-        ): SampleElementFeatureProvider? =
-            if (elementConfigProvider.isSampleFeatureEnabled) {
-                SampleElementFeatureProvider()
+        ): SampleElementExtensionProvider? =
+            if (elementConfigProvider.isSampleExtensionEnabled) {
+                SampleElementExtensionProvider()
             } else {
                 null
             }
 
         @Provides
         fun provideLifecycleModules(
-            sampleElementFeatureProvider: SampleElementFeatureProvider?
-        ): Array<LifecycleModule> = listOfNotNull(
-            sampleElementFeatureProvider?.lifecycleModule()
+            sampleElementFeatureProvider: SampleElementExtensionProvider?
+        ): Array<LifecycleExtension> = listOfNotNull(
+            sampleElementFeatureProvider?.lifecycle()
         ).toTypedArray()
     }
 }

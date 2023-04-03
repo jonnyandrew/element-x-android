@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package io.element.android.x.config
+plugins {
+    id("io.element.android-library")
+}
 
-import io.element.extension.ElementConfigProvider
-import io.element.extension.connection.ConnectionConfig
+android {
+    namespace = "io.element.android.extensions.host.api"
+}
 
-class ElementConfig: ElementConfigProvider {
-    override val configName: String
-        get() = "Default community configuration"
-
-    override fun connectionConfig(): ConnectionConfig? = null
-
-    override val isSampleExtensionEnabled: Boolean
-        get() = false
+dependencies {
+    api(projects.extension.sdk)
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
 }

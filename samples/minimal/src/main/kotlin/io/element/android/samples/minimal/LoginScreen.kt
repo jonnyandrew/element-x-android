@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import io.element.android.features.login.impl.root.LoginRootPresenter
 import io.element.android.features.login.impl.root.LoginRootView
 import io.element.android.libraries.matrix.api.auth.MatrixAuthenticationService
-import io.element.modulesdk.host.api.ModuleHost
+import io.element.extension.host.api.ModuleHost
 
 class LoginScreen(
     private val authenticationService: MatrixAuthenticationService,

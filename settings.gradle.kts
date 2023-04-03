@@ -65,5 +65,5 @@ includeProjects(File(rootDir, "features"), ":features")
 includeProjects(File(rootDir, "libraries"), ":libraries")
 includeProjects(File(rootDir, "services"), ":services")
 
-includeProjects(File(rootDir, "modulesdk"), ":modulesdk")
+includeProjects(File(rootDir, "extension"), ":extension")
 includeProjects(File(rootDir, "config"), ":config")

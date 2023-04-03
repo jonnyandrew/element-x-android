@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package io.element.android.x.config
+package io.element.extension.host.impl
 
-import io.element.extension.ElementConfigProvider
 import io.element.extension.connection.ConnectionConfig
+import io.element.extension.host.api.ModuleHost
+import io.element.extension.lifecycle.LifecycleExtension
+import javax.inject.Inject
 
-class ElementConfig: ElementConfigProvider {
-    override val configName: String
-        get() = "Default community configuration"
-
-    override fun connectionConfig(): ConnectionConfig? = null
-
-    override val isSampleExtensionEnabled: Boolean
-        get() = false
+class DefaultModuleHost @Inject constructor(
+    override val connectionModule: ConnectionConfig?,
+    lifecycleModules: Array<LifecycleExtension>,
+) : ModuleHost {
+    override val lifecycleModule: LifecycleExtension =
+        lifecycleModules.toSimpleCompositeModule()
 }

@@ -22,8 +22,8 @@ import dagger.Provides
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.di.SingleIn
 import io.element.android.x.config.ElementConfig
-import io.element.modulesdk.ElementConfigProvider
-import io.element.modulesdk.connection.ConnectionModule
+import io.element.extension.ElementConfigProvider
+import io.element.extension.connection.ConnectionConfig
 import timber.log.Timber
 import java.util.*
 
@@ -40,8 +40,8 @@ interface ConfigModule {
         @Provides
         fun provideConnectionModule(
             elementConfigProvider: ElementConfigProvider
-        ): ConnectionModule? =
-            elementConfigProvider.connectionModule().also {
+        ): ConnectionConfig? =
+            elementConfigProvider.connectionConfig().also {
                 Timber.d("CONFIG: ConnectionModule ${it} ")
             }
     }

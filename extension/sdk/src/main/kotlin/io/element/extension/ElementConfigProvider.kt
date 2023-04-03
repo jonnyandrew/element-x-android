@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package io.element.android.x.config
+package io.element.extension
 
-import io.element.extension.ElementConfigProvider
 import io.element.extension.connection.ConnectionConfig
 
-class ElementConfig: ElementConfigProvider {
-    override val configName: String
-        get() = "Default community configuration"
+/**
+ * Implement this interface to provide a configuration
+ */
+interface ElementConfigProvider {
+    val configName: String
+    fun connectionConfig(): ConnectionConfig? = null
 
-    override fun connectionConfig(): ConnectionConfig? = null
-
-    override val isSampleExtensionEnabled: Boolean
-        get() = false
+    val isSampleExtensionEnabled: Boolean get() = false
 }

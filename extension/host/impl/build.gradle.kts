@@ -1,6 +1,3 @@
-import extension.editionFlavors
-import extension.substituteConfig
-
 /*
  * Copyright (c) 2023 New Vector Ltd
  *
@@ -31,9 +28,7 @@ anvil {
 }
 
 android {
-    namespace = "io.element.android.config"
-
-    editionFlavors()
+    namespace = "io.element.android.extensions.host.impl"
 }
 
 dependencies {
@@ -42,15 +37,9 @@ dependencies {
     implementation(projects.libraries.di)
     implementation(projects.anvilannotations)
 
+    implementation(projects.extension.host.api)
     implementation(projects.extension.sdk)
-    implementation(projects.config.default)
 
-    // Features
-    "enterpriseImplementation"(libs.module.sample)
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
-    this
 }
-
-project.substituteConfig()
-

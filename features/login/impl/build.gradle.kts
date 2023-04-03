@@ -47,7 +47,7 @@ dependencies {
     implementation(projects.libraries.elementresources)
     implementation(projects.libraries.testtags)
     implementation(projects.libraries.uiStrings)
-    implementation(projects.modulesdk.host.api)
+    implementation(projects.extension.host.api)
     api(projects.features.login.api)
     ksp(libs.showkase.processor)
 
