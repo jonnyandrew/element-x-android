@@ -19,6 +19,7 @@ package io.element.extension
 import io.element.extension.lifecycle.LifecycleExtension
 import io.element.extension.login.LoginExtension
 import io.element.extension.onboarding.OnboardingExtension
+import io.element.extension.sync.SlidingSyncExtension
 
 /**
  * Implement this interface to provide an extension
@@ -30,6 +31,7 @@ interface ElementExtensionProvider {
 fun ElementExtensionProvider.login() = get<LoginExtension>()
 fun ElementExtensionProvider.lifecycle() = get<LifecycleExtension>()
 fun ElementExtensionProvider.onboarding() = get<OnboardingExtension>()
+fun ElementExtensionProvider.slidingSync() = get<SlidingSyncExtension>()
 
 private inline fun <reified T : ElementExtension>
     ElementExtensionProvider.get() = extensions().filterIsInstance<T>()

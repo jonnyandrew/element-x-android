@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-plugins {
-    id("io.element.android-library")
-}
+package io.element.extension.sync
 
-android {
-    namespace = "io.element.android.extensions.host.api"
-}
+import io.element.extension.ElementExtension
 
-dependencies {
-    api(projects.extension.sdk)
-    implementation(projects.libraries.matrix.api)
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
+interface SlidingSyncExtension : ElementExtension {
+    fun onSlidingSyncUpdate(
+        lists: List<String>,
+        rooms: List<String>,
+    )
 }

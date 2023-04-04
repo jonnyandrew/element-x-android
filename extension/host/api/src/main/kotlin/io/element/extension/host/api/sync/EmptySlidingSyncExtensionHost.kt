@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-plugins {
-    id("io.element.android-library")
-}
+package io.element.extension.host.api.sync
 
-android {
-    namespace = "io.element.android.extensions.host.api"
-}
+import io.element.android.libraries.matrix.api.MatrixClient
 
-dependencies {
-    api(projects.extension.sdk)
-    implementation(projects.libraries.matrix.api)
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
+class EmptySlidingSyncExtensionHost: SlidingSyncExtensionHost {
+    override fun onNewMatrixClient(matrixClient: MatrixClient) { }
+    override fun onDestroy(matrixClient: MatrixClient) { }
 }

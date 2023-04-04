@@ -18,6 +18,7 @@ package io.element.android.libraries.matrix.test.room
 
 import io.element.android.libraries.matrix.api.room.RoomSummary
 import io.element.android.libraries.matrix.api.room.RoomSummaryDataSource
+import io.element.android.libraries.matrix.api.sync.SlidingSyncUpdate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -32,6 +33,10 @@ class FakeRoomSummaryDataSource : RoomSummaryDataSource {
     override fun roomSummaries(): StateFlow<List<RoomSummary>> {
         return roomSummariesFlow
     }
+
+    override fun addSlidingSyncObserver(observer: (SlidingSyncUpdate) -> Unit) { }
+
+    override fun clearSlidingSyncObservers() { }
 
     var latestSlidingSyncRange: IntRange? = null
         private set

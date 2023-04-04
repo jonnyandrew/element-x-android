@@ -16,11 +16,13 @@
 
 package io.element.android.config
 
+import android.content.Context
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import io.element.android.feature.SampleElementExtensionProvider
 import io.element.android.libraries.di.AppScope
+import io.element.android.libraries.di.ApplicationContext
 import io.element.android.libraries.di.SingleIn
 import io.element.extension.ElementConfigProvider
 import io.element.extension.ElementExtension
@@ -34,10 +36,12 @@ interface FeaturesModule {
         @Provides
         @SingleIn(AppScope::class)
         fun provideSampleElementFeatureProvider(
+            @ApplicationContext
+            context: Context,
             elementConfigProvider: ElementConfigProvider
         ): SampleElementExtensionProvider? =
             if (elementConfigProvider.isSampleExtensionEnabled) {
-                SampleElementExtensionProvider()
+                SampleElementExtensionProvider(context)
             } else {
                 null
             }

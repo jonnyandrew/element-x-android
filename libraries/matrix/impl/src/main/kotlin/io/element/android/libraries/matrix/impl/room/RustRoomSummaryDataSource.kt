@@ -19,6 +19,7 @@ package io.element.android.libraries.matrix.impl.room
 import io.element.android.libraries.core.coroutine.CoroutineDispatchers
 import io.element.android.libraries.matrix.api.room.RoomSummary
 import io.element.android.libraries.matrix.api.room.RoomSummaryDataSource
+import io.element.android.libraries.matrix.api.sync.SlidingSyncUpdate
 import io.element.android.libraries.matrix.impl.sync.roomListDiff
 import io.element.android.libraries.matrix.impl.sync.state
 import kotlinx.coroutines.CoroutineScope
@@ -54,6 +55,7 @@ internal class RustRoomSummaryDataSource(
 
     private val roomSummaries = MutableStateFlow<List<RoomSummary>>(emptyList())
     private val state = MutableStateFlow(SlidingSyncState.NOT_LOADED)
+    private var slidingSyncObservers: MutableList<((SlidingSyncUpdate) -> Unit)> = mutableListOf()
 
     fun init() {
         coroutineScope.launch {
@@ -99,7 +101,23 @@ internal class RustRoomSummaryDataSource(
         onRestartSync()
     }
 
+    override fun addSlidingSyncObserver(observer: (SlidingSyncUpdate) -> Unit) {
+        slidingSyncObservers.add(observer)
+    }
+
+    override fun clearSlidingSyncObservers() {
+        slidingSyncObservers.clear()
+    }
+
     private suspend fun didReceiveSyncUpdate(summary: UpdateSummary) {
+        slidingSyncObservers.forEach { observer ->
+            observer.invoke(
+                SlidingSyncUpdate(
+                    lists = summary.lists,
+                    rooms = summary.rooms,
+                )
+            )
+        }
         Timber.v("UpdateRooms with identifiers: ${summary.rooms}")
         if (state.value != SlidingSyncState.FULLY_LOADED) {
             return

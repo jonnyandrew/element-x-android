@@ -16,9 +16,12 @@
 
 package io.element.android.libraries.matrix.api.room
 
+import io.element.android.libraries.matrix.api.sync.SlidingSyncUpdate
 import kotlinx.coroutines.flow.StateFlow
 
 interface RoomSummaryDataSource {
     fun roomSummaries(): StateFlow<List<RoomSummary>>
     fun setSlidingSyncRange(range: IntRange)
+    fun addSlidingSyncObserver(observer: (SlidingSyncUpdate) -> Unit)
+    fun clearSlidingSyncObservers()
 }

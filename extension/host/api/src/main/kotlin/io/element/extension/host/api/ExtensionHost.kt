@@ -18,6 +18,7 @@ package io.element.extension.host.api
 
 import io.element.extension.connection.ConnectionConfig
 import io.element.extension.host.api.onboarding.OnboardingExtensionHost
+import io.element.extension.host.api.sync.SlidingSyncExtensionHost
 import io.element.extension.lifecycle.LifecycleExtension
 import io.element.extension.login.LoginExtension
 
@@ -29,4 +30,5 @@ interface ExtensionHost {
     val lifecycleExtensions: LifecycleExtension?
     val loginExtensions: LoginExtension?
     val onboardingExtensionHost: OnboardingExtensionHost
+    val slidingSyncExtensionHost: SlidingSyncExtensionHost
 }

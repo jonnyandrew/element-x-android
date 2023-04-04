@@ -39,6 +39,9 @@ class MatrixClientsHolder @Inject constructor(private val authenticationService:
         sessionIdsToMatrixClient[matrixClient.sessionId] = matrixClient
     }
 
+    fun get(sessionId: SessionId) =
+        sessionIdsToMatrixClient[sessionId]
+
     fun removeAll() {
         sessionIdsToMatrixClient.clear()
     }

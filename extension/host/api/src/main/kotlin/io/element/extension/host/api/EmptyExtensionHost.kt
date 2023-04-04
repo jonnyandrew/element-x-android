@@ -19,6 +19,8 @@ package io.element.extension.host.api
 import io.element.extension.connection.ConnectionConfig
 import io.element.extension.host.api.onboarding.EmptyOnboardingExtensionHost
 import io.element.extension.host.api.onboarding.OnboardingExtensionHost
+import io.element.extension.host.api.sync.EmptySlidingSyncExtensionHost
+import io.element.extension.host.api.sync.SlidingSyncExtensionHost
 import io.element.extension.lifecycle.LifecycleExtension
 import io.element.extension.login.LoginExtension
 
@@ -34,4 +36,6 @@ class EmptyExtensionHost : ExtensionHost {
         get() = null
     override val onboardingExtensionHost: OnboardingExtensionHost
         get() = EmptyOnboardingExtensionHost()
+    override val slidingSyncExtensionHost: SlidingSyncExtensionHost
+        get() = EmptySlidingSyncExtensionHost()
 }

@@ -22,11 +22,13 @@ import io.element.extension.connection.ConnectionConfig
 import io.element.extension.host.api.ExtensionHost
 import io.element.extension.host.api.onboarding.OnboardingExtensionHost
 import io.element.extension.host.impl.onboarding.DefaultOnboardingExtensionHost
+import io.element.extension.host.impl.sync.DefaultSlidingSyncExtensionHost
 import io.element.extension.lifecycle
 import io.element.extension.lifecycle.LifecycleExtension
 import io.element.extension.login
 import io.element.extension.login.LoginExtension
 import io.element.extension.onboarding
+import io.element.extension.slidingSync
 import javax.inject.Inject
 
 class DefaultExtensionHost @Inject constructor(
@@ -48,4 +50,8 @@ class DefaultExtensionHost @Inject constructor(
         DefaultOnboardingExtensionHost(
             extensionProvider.onboarding()
         )
+
+    override val slidingSyncExtensionHost = DefaultSlidingSyncExtensionHost(
+        extensionProvider.slidingSync(),
+    )
 }

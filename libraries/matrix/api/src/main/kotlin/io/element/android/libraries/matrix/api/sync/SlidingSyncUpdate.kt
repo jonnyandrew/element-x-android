@@ -14,16 +14,9 @@
  * limitations under the License.
  */
 
-plugins {
-    id("io.element.android-library")
-}
+package io.element.android.libraries.matrix.api.sync
 
-android {
-    namespace = "io.element.android.extensions.host.api"
-}
-
-dependencies {
-    api(projects.extension.sdk)
-    implementation(projects.libraries.matrix.api)
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
-}
+data class SlidingSyncUpdate(
+    val lists: List<String>,
+    val rooms: List<String>,
+)
